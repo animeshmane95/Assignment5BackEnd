@@ -18,11 +18,34 @@ function findAllUsers() {
   return userModel.find();
 }
 
+function updateUser(user){
+	console.log("inside service update user");
+	console.log(user._id);
+	userModel.findByIdAndUpdate(user._id,
+	{
+		$set: {username: user.username, password: user.password, firstName: user.firstName, lastName: user.lastName, email: user.email, phoneNumber: user.phoneNumber}
+	},
+	{
+		new: true
+	},
+	function(err, updatedUser){
+			if(err)
+			{
+
+			}
+			else
+			{
+				
+			}
+	})
+}
+
 var api = {
   createUser: createUser,
   findAllUsers: findAllUsers,
   findUserById: findUserById,
-  findUserByCredentials: findUserByCredentials
+  findUserByCredentials: findUserByCredentials,
+  updateUser: updateUser
 };
 
 module.exports = api;

@@ -5,6 +5,7 @@ module.exports = function (app) {
   app.get('/api/profile', profile);
   app.post('/api/logout', logout);
   app.post('/api/login', login);
+  app.put('/api/update',updateUser)
 
   var userModel = require('../models/user/user.model.server');
 
@@ -15,6 +16,7 @@ module.exports = function (app) {
       .then(function(user) {
         req.session['currentUser'] = user;
         res.json(user);
+        res.send(user);
       })
   }
 
@@ -32,7 +34,11 @@ module.exports = function (app) {
   }
 
   function profile(req, res) {
-    res.send(req.session['currentUser']);
+   var user = req.session['currentUser'];
+   userModel.findUserById(user._id)
+    .then(function(user) {
+      res.json(user);
+    });
   }
 
   function createUser(req, res) {
@@ -49,5 +55,13 @@ module.exports = function (app) {
       .then(function (users) {
         res.send(users);
       })
+  }
+
+  function updateUser(req,res){
+
+      var user = req.body;
+      console.log(user);
+      userModel.updateUser(user);
+      res.send("updated user");
   }
 }
