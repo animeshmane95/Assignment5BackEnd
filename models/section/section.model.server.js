@@ -6,6 +6,10 @@ function createSection(section) {
   return sectionModel.create(section);
 }
 
+function findSectionById(sectionId) {
+  return sectionModel.findById(sectionId);
+}
+
 function deleteSection(sectionId){
   console.log(" " + sectionId)
   console.log("Inside deleteSection section.server")
@@ -14,7 +18,7 @@ function deleteSection(sectionId){
 
     }
     else{
-      
+
     }
   });
 }
@@ -41,10 +45,37 @@ function incrementSectionSeats(sectionId) {
   });
 }
 
+
+function updateSection(section){
+  console.log("inside service update section");
+  console.log(section._id);
+  sectionModel.findByIdAndUpdate(section._id,
+  {
+    $set: {name: section.name, seats: section.seats}
+  },
+  {
+    new: true
+  },
+  function(err, updateSection){
+      if(err)
+      {
+
+      }
+      else
+      {
+        
+      }
+  })
+}
+
+
+
 module.exports = {
   createSection: createSection,
   findSectionsForCourse: findSectionsForCourse,
   decrementSectionSeats: decrementSectionSeats,
   incrementSectionSeats: incrementSectionSeats,
-  deleteSection: deleteSection
+  deleteSection: deleteSection,
+  findSectionById: findSectionById,
+  updateSection: updateSection
 };
