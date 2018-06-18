@@ -6,6 +6,19 @@ function createSection(section) {
   return sectionModel.create(section);
 }
 
+function deleteSection(sectionId){
+  console.log(" " + sectionId)
+  console.log("Inside deleteSection section.server")
+  sectionModel.findByIdAndRemove(sectionId,function(err,deleteSection){
+    if(err){
+
+    }
+    else{
+      
+    }
+  });
+}
+
 function findSectionsForCourse(courseId) {
   return sectionModel.find({courseId: courseId});
 }
@@ -17,6 +30,8 @@ function decrementSectionSeats(sectionId) {
     $inc: {seats: -1}
   });
 }
+
+
 
 function incrementSectionSeats(sectionId) {
   return sectionModel.update({
@@ -30,5 +45,6 @@ module.exports = {
   createSection: createSection,
   findSectionsForCourse: findSectionsForCourse,
   decrementSectionSeats: decrementSectionSeats,
-  incrementSectionSeats: incrementSectionSeats
+  incrementSectionSeats: incrementSectionSeats,
+  deleteSection: deleteSection
 };
