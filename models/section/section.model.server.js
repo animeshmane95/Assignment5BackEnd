@@ -10,6 +10,24 @@ function findSectionById(sectionId) {
   return sectionModel.findById(sectionId);
 }
 
+function addStudnentInSection(studentId,sectionId){
+
+  return sectionModel.findByIdAndUpdate(sectionId,
+  {
+    $push: { students: studentId } 
+  },)
+
+}
+
+function deleteStudnentInSection(studentId,sectionId){
+
+  return sectionModel.findByIdAndUpdate(sectionId,
+  {
+    $pull: { students: studentId } 
+  },)
+
+}
+
 function deleteSection(sectionId){
   console.log(" " + sectionId)
   console.log("Inside deleteSection section.server")
@@ -77,5 +95,7 @@ module.exports = {
   incrementSectionSeats: incrementSectionSeats,
   deleteSection: deleteSection,
   findSectionById: findSectionById,
-  updateSection: updateSection
+  updateSection: updateSection,
+  addStudnentInSection: addStudnentInSection,
+  deleteStudnentInSection: deleteStudnentInSection
 };

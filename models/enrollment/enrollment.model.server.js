@@ -16,7 +16,16 @@ function findSectionsForStudent(studentId) {
     .exec();
 }
 
+function unenrollStudentInSection(enrollmentId){
+  console.log('Web storem' + enrollmentId)
+	return enrollmentModel.remove({_id: enrollmentId}, function (err,obj) {
+		if(err) throw err;
+	});
+
+}
+
 module.exports = {
   enrollStudentInSection: enrollStudentInSection,
-  findSectionsForStudent: findSectionsForStudent
+  findSectionsForStudent: findSectionsForStudent,
+  unenrollStudentInSection: unenrollStudentInSection
 };

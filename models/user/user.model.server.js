@@ -14,6 +14,25 @@ function createUser(user) {
   return userModel.create(user);
 }
 
+function addSectionInStudent(studentId,sectionId){
+
+  return userModel.findByIdAndUpdate(studentId,
+  {
+    $push: { sections: sectionId } 
+  },)
+
+}
+
+
+function deleteSectionInStudent(studentId,sectionId){
+
+  return userModel.findByIdAndUpdate(studentId,
+  {
+    $pull: { sections: sectionId } 
+  },)
+
+} 
+
 function findAllUsers() {
   return userModel.find();
 }
@@ -45,7 +64,9 @@ var api = {
   findAllUsers: findAllUsers,
   findUserById: findUserById,
   findUserByCredentials: findUserByCredentials,
-  updateUser: updateUser
+  updateUser: updateUser,
+  addSectionInStudent: addSectionInStudent,
+  deleteSectionInStudent: deleteSectionInStudent 
 };
 
 module.exports = api;
