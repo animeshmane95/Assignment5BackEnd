@@ -4,6 +4,7 @@ module.exports = function (app) {
   app.get('/api/course/:courseId/section', findSectionsForCourse);
   app.post('/api/section/:sectionId/enrollment', enrollStudentInSection);
   app.get('/api/student/section', findSectionsForStudent);
+  app.get('/api/student/section/:sectionId',  findStudentsForSection);
   app.delete('/api/section/:sectionId', deleteSection);
   app.get('/api/sectionProfile/:sectionId',section)
   app.put('/api/updateSection',updateSection)
@@ -16,11 +17,21 @@ module.exports = function (app) {
   function findSectionsForStudent(req, res) {
     var currentUser = req.session.currentUser;
     var studentId = currentUser._id;
+    console.log(studentId);
     enrollmentModel
       .findSectionsForStudent(studentId)
       .then(function(enrollments) {
         res.json(enrollments);
       });
+  }
+
+  function findStudentsForSection(req,res){
+    var sectionId = req.params.sectionId;
+    console.log("Here I am  " + sectionId)
+    enrollmentModel.findStudentsForSection(sectionId)
+    .then(function(enrollments){
+      res.json(enrollments);
+    });
   }
 
   function unenrollStudent(req,res){

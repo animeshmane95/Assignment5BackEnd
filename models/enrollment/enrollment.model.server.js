@@ -16,6 +16,10 @@ function findSectionsForStudent(studentId) {
     .exec();
 }
 
+function findStudentsForSection(sectionId){
+  return enrollmentModel.find({section: sectionId}).populate('student').exec();
+}
+
 function unenrollStudentInSection(enrollmentId){
   console.log('Web storem' + enrollmentId)
 	return enrollmentModel.remove({_id: enrollmentId}, function (err,obj) {
@@ -27,5 +31,6 @@ function unenrollStudentInSection(enrollmentId){
 module.exports = {
   enrollStudentInSection: enrollStudentInSection,
   findSectionsForStudent: findSectionsForStudent,
-  unenrollStudentInSection: unenrollStudentInSection
+  unenrollStudentInSection: unenrollStudentInSection,
+  findStudentsForSection: findStudentsForSection
 };
