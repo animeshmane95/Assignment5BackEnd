@@ -1,7 +1,7 @@
 var express = require('express')
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/webdev-summer');
+mongoose.connect('mongodb://heroku_jsg3fmg1:l65k9ib92n3jsksj578rmc25li@ds263590.mlab.com:63590/heroku_jsg3fmg1');
 
 
 var app = express()
@@ -10,8 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin",
-    "http://localhost:4200");
+  res.header("Access-Control-Allow-Origin",req.headers.origin);
   res.header("Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Methods",
@@ -32,7 +31,7 @@ app.use(session({
 
 
 app.get('/', function (req, res) {
-  res.send('Hello World')
+  res.send('Hello World as,ja ')
 })
 
 app.get('/message/:theMessage', function (req, res) {
