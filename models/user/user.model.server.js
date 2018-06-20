@@ -42,7 +42,7 @@ function updateUser(user){
 	console.log(user._id);
 	userModel.findByIdAndUpdate(user._id,
 	{
-		$set: {username: user.username, password: user.password, firstName: user.firstName, lastName: user.lastName, email: user.email, phoneNumber: user.phoneNumber}
+		$set: {username: user.username, password: user.password, firstName: user.firstName, lastName: user.lastName, email: user.email, phoneNumber: user.phoneNumber, address: user.address}
 	},
 	{
 		new: true
